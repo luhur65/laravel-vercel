@@ -21,6 +21,6 @@ class ContactController extends Controller
 
         Mail::to("dharmabaktisitumorang@gmail.com")->send(new SendEmail($data));
 
-        \redirect('contact');
+        return \redirect()->route('contact');
     }
 }
