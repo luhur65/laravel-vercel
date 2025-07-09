@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('contact');
     }
 
@@ -16,11 +17,15 @@ class ContactController extends Controller
     {
         $data = [
             "nama" => $request->nama,
+            "email" => $request->email,
             "doa" => $request->doa,
         ];
 
-        Mail::to("dharmabaktisitumorang@gmail.com")->send(new SendEmail($data));
+        Mail::to($request->email)
+            ->cc("dharmabaktisitumorang@gmail.com")
+            ->send(new SendEmail($data));
 
-        return \redirect()->route('contact');
+        // Set flash message
+        return redirect('contact')->with('success', 'Doa berhasil dikirim!');
     }
 }

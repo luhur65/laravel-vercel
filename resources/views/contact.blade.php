@@ -2,8 +2,19 @@
 
 @section('content')
 
+{{-- start content --}}
+@if (session('success'))
+<div class="alert alert-success">
+    <strong>{{ session('success') }}</strong>
+</div>
+@endif
+
 <form action="{{ route('kirimdoa') }}" method="post">
   @csrf
+  <div class="mb-3">
+    <label for="email" class="form-label">Email anda</label>
+    <input type="text" class="form-control" id="email" placeholder="JohnDoe@gmail.com" name="email">
+  </div>
   <div class="mb-3">
     <label for="nama" class="form-label">Nama anda</label>
     <input type="text" class="form-control" id="nama" placeholder="John Doe" name="nama">
